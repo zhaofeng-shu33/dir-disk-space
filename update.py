@@ -18,4 +18,4 @@ def scan(data):
             scan(data[i])
             os.chdir('../')
         else: # update file info in data
-            data[i] = os.path.getsize(i) 
+            data[i] = 512 * os.stat(i).st_blocks

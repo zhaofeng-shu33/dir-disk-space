@@ -1,9 +1,28 @@
+import argparse
 from time import time
+import os
+
+from structure import load_cache
+from structure import save_cache
+from structure import get_total_size 
 from update import current_timestamp
+from update import elapsed_seconds
 from update import scan
 
 if __name__ == '__main__':
     current_timestamp = time()
-    dist_tree = {}
-    scan(dist_tree)
-    print(dist_tree)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cache_filename', default='data.json')
+    parser.add_argument('--elapsed', default=3600, type=int)
+    parser.add_argument('--dir', default='./')
+    args = parser.parse_args()
+    elapsed_seconds = args.elapsed
+    if os.path.exists(args.cache_filename):
+            data = load_cache(args.cache_filename)
+    data = {}
+    current_dir = os.getcwd()
+    os.chdir(args.dir)
+    scan(data)
+    os.chdir(current_dir)
+    save_cache(args.cache_filename, data)
+    print(get_total_size(data)) 
