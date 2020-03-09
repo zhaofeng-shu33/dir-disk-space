@@ -25,4 +25,4 @@ if __name__ == '__main__':
     scan(data)
     os.chdir(current_dir)
     save_cache(args.cache_filename, data)
-    print(get_total_size(data)) 
+    print(get_total_size(data) / 1024, 'KB') 
