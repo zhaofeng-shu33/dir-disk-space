@@ -15,8 +15,8 @@ def get_total_size(data):
     for k, v in data.items():
         if type(v) is int:
             _size += v
-        elif v == {}:
-            _size += get_total_size(v)
-        else:
+        elif type(v) is dict:
+            if v:
+                _size += get_total_size(v)
             _size += 4096
     return _size 
