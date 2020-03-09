@@ -5,18 +5,17 @@ import os
 from structure import load_cache
 from structure import save_cache
 from structure import get_total_size 
-from update import current_timestamp
-from update import elapsed_seconds
 from update import scan
+import update
 
 if __name__ == '__main__':
-    current_timestamp = time()
+    update.current_timestamp = time()
     parser = argparse.ArgumentParser()
     parser.add_argument('--cache_filename', default='data.json')
     parser.add_argument('--elapsed', default=3600, type=int)
     parser.add_argument('--dir', default='./')
     args = parser.parse_args()
-    elapsed_seconds = args.elapsed
+    update.elapsed_seconds = args.elapsed
     if os.path.exists(args.cache_filename):
             data = load_cache(args.cache_filename)
     data = {}
